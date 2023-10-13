@@ -14,7 +14,7 @@ export const MiContextoProvider = ({ children }) => {
   const [productos, setProductos] = useState([])
 
       useEffect(() => {
-          fetch("https://ecommerce-next-delta.vercel.app/api/productos/")
+          fetch("/api/productos")
               .then((response) => response.json())
               .then((data) => {
                   setProductos(data);

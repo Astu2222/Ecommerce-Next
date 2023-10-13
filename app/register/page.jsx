@@ -6,10 +6,8 @@ import { Button } from '@nextui-org/button';
 
 
 
-
 const Register = () => {
     const router = useRouter()
-
 
 
   const [formErrors, setFormErrors] = useState({});
@@ -64,7 +62,7 @@ const Register = () => {
     
     if (validateForm()) {
       try {
-        const response = await fetch('https://ecommerce-next-delta.vercel.app/api/usuarios', {
+        const response = await fetch( '/api/usuarios', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -18,7 +18,7 @@ export default function Page({ params }: { params: { id: string } }) {
     
     setSpinner(true)
 
-    fetch(`https://ecommerce-next-delta.vercel.app/api/productos/${params.id}`)
+    fetch(`/api/productos/${params.id}`)
       .then((response) => response.json())
       .then((data) => {
         setProductosXID(data);
