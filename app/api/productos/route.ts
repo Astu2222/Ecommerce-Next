@@ -2,6 +2,7 @@ import { IncomingMessage } from "http";
 import { NextResponse } from "next/server";
 import raw from "raw-body";
 import { NextApiRequest, NextApiResponse } from 'next';
+import { sql } from '@vercel/postgres';
 
 let ultimoId = 2;
 
@@ -39,23 +40,19 @@ export async function GET(request: Request) {
 // Agregar productos:
 
 
+
 export async function POST(request: Request) {
   try {
-    const nuevoLugar = await request.json();
+    const nuevoProducto = await sql`CREATE TABLE Pets ( nombre varchar(255), descripcion varchar(255) );`;
     // Incrementa el último ID y úsalo para el nuevo producto
-    ultimoId++;
-    nuevoLugar.id = ultimoId.toString();
+
     
     // Crear un nuevo objeto JSON con el ID en la parte superior
-    const nuevoProductoConIdArriba = {
-      id: nuevoLugar.id,
-      ...nuevoLugar,
-    };
+   
 
     // Agrega el nuevo producto a la matriz de productos
-    productos.push(nuevoProductoConIdArriba);
     
-    return NextResponse.json(nuevoProductoConIdArriba, { status: 201 });
+    return NextResponse.json(nuevoProducto, { status: 201 });
   } catch (error) {
     console.error("Error al procesar la solicitud POST:", error);
   }

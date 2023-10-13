@@ -62,7 +62,7 @@ const Register = () => {
     
     if (validateForm()) {
       try {
-        const response = await fetch( '/api/usuarios', {
+        const response = await fetch( '/api/database/usuarios', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

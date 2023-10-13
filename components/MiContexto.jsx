@@ -14,7 +14,7 @@ export const MiContextoProvider = ({ children }) => {
   const [productos, setProductos] = useState([])
 
       useEffect(() => {
-          fetch("/api/productos")
+          fetch("/api/database/productos")
               .then((response) => response.json())
               .then((data) => {
                   setProductos(data);

@@ -41,6 +41,12 @@ interface CustomHeaders extends Headers {
   cookie?: string; // Declara la propiedad 'cookie' en la interfaz
 }
 
+
+
+
+
+
+
 //Obtener Todos:
 
 export async function GET(request: Request) {

@@ -18,7 +18,7 @@ export default function Page({ params }: { params: { id: string } }) {
     
     setSpinner(true)
 
-    fetch(`/api/productos/${params.id}`)
+    fetch(`/api/database/productos/${params.id}`)
       .then((response) => response.json())
       .then((data) => {
         setProductosXID(data);
@@ -58,7 +58,7 @@ export default function Page({ params }: { params: { id: string } }) {
         <div className="w-full flex flex-row items-center justify-center  ">
 
           <div className="w-1/2">
-          <Image className="m-4" src={productosXID.urlImagen} alt="" />
+          <Image className="m-4" src={productosXID.url_imagen} alt="" />
           </div>
 
           
