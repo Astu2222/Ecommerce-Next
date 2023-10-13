@@ -14,9 +14,9 @@ const Register = () => {
   const [formData, setFormData] = useState({
         nombre: '',
         apellido: '',
-        nombreUsuario: '',
         email: '',
         contraseña: '',
+        url_imagen: '',
         rol: 'user',
   });
 
@@ -36,14 +36,15 @@ const Register = () => {
       errors.apellido = 'El apellido es requerido';
     }
 
-    if (!formData.nombreUsuario) {
-      errors.nombreUsuario = 'El nombre de usuario es requerido';
-    }
-
+    
     if (!formData.email) {
       errors.email = 'El correo electrónico es requerido';
     } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
       errors.email = 'Ingrese un correo electrónico válido';
+    }
+
+    if (!formData.url_imagen) {
+      errors.url_imagen = 'La URL de la imagen es requerida';
     }
 
     if (!formData.contraseña) {
@@ -59,6 +60,7 @@ const Register = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     
     if (validateForm()) {
       try {
@@ -78,13 +80,13 @@ const Register = () => {
           setFormData({
             nombre: '',
             apellido: '',
-            nombreUsuario: '',
             email: '',
             contraseña: '',
+            url_imagen: '',
             rol: 'user',
           });
 
-          router.push('/');
+          router.push('/login');
         } else {
           console.error('Error al enviar la solicitud:', response.statusText);
         }
@@ -107,10 +109,7 @@ const Register = () => {
           <Input type="text" label="Apellido:" id="apellido" name="apellido" value={formData.apellido} onChange={handleChange} required />
           {formErrors.apellido && <span className="error">{formErrors.apellido}</span>}
         </div>
-        <div className=" w-1/5 m-2">
-          <Input type="text" label="Nombre de usuario:" id="nombreUsuario" name="nombreUsuario" value={formData.nombreUsuario} onChange={handleChange} required />
-          {formErrors.nombreUsuario && <span className="error">{formErrors.nombreUsuario}</span>}
-        </div>
+
         <div className=" w-1/5 m-2">
           <Input type="email" label="Correo Electrónico:" id="email" name="email" value={formData.email} onChange={handleChange} required />
           {formErrors.email && <span className="error">{formErrors.email}</span>}
@@ -119,6 +118,11 @@ const Register = () => {
           <Input type="password" label="Contraseña:" id="contraseña" name="contraseña" value={formData.contraseña} onChange={handleChange} required />
           {formErrors.contraseña && <span className="error">{formErrors.contraseña}</span>}
         </div>
+        <div className=" w-1/5 m-2">
+          <Input type="text" label="URL de la imagen:" id="url_imagen" name="url_imagen" value={formData.url_imagen} onChange={handleChange} required />
+          {formErrors.url_imagen && <span className="error">{formErrors.url_imagen}</span>}
+        </div>
+
         <div>
           <Button type="submit" color="primary" variant="bordered">
             Enviar

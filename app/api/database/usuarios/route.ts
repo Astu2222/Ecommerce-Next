@@ -4,7 +4,7 @@ import { getTokenFromAuthorizationHeader } from "../auth/login/route";
 import jwt from 'jsonwebtoken';
 import cookie from 'cookie';
 
-export const KEY = 'aslkdjaskljdaklsjdalsdjalskdj';
+const KEY = process.env.KEY;
 
 
 
@@ -16,7 +16,7 @@ export async function GET(request: Request) {
     }
   
     try {
-      const decodedToken = jwt.verify(token, KEY);
+      const decodedToken = jwt.verify(token, KEY as string);
   
       if (typeof decodedToken === 'string') {
         return new Response('Token inválido', { status: 401 });

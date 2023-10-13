@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import jwt from 'jsonwebtoken';
 import cookie from 'cookie';
 
-export const KEY = 'aslkdjaskljdaklsjdalsdjalskdj';
+const KEY = process.env.KEY;
 
 export async function POST(request: Request) {
   const nuevoLogin = await request.json();
@@ -15,6 +15,7 @@ export async function POST(request: Request) {
       SELECT * FROM usuarios
       WHERE email = ${email} AND contraseña = ${password}
     `;
+    
 
     const usuarioEncontrado = result.rows[0];
 
@@ -22,7 +23,7 @@ export async function POST(request: Request) {
       return NextResponse.json("Fallo iniciar sesión");
     }
 
-    const token = jwt.sign({ admin: usuarioEncontrado.rol === 'admin' }, KEY, { expiresIn: '1h' });
+    const token = jwt.sign({ admin: usuarioEncontrado.rol === 'admin' }, KEY as string, { expiresIn: '1h' });
 
     // Crea una cookie con el token
     const cookieHeader = cookie.serialize('token', token, {
@@ -49,7 +50,7 @@ export async function GET(request: Request) {
     }
   
     try {
-      const decodedToken = jwt.verify(token, KEY);
+      const decodedToken = jwt.verify(token, KEY as string);
       
       // Realiza una consulta a la base de datos para obtener los usuarios (ajusta la consulta según tus necesidades)
       const result = await sql`SELECT * FROM usuarios`;
