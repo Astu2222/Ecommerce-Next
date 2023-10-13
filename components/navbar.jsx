@@ -1,3 +1,4 @@
+'use client'
 import {
 	Navbar as NextUINavbar,
 	NavbarContent,
@@ -11,7 +12,7 @@ import { Button } from "@nextui-org/button";
 import { Kbd } from "@nextui-org/kbd";
 import { Link } from "@nextui-org/link";
 import { Input } from "@nextui-org/input";
-
+import { Image } from "@nextui-org/image";
 import { link as linkStyles } from "@nextui-org/theme";
 
 import { siteConfig } from "@/config/site";
@@ -26,10 +27,69 @@ import {
 	HeartFilledIcon,
 	SearchIcon,
 } from "@/components/icons";
+import './navbar.css'
+
 
 import { Logo } from "@/components/icons";
+import { useEffect, useState } from "react";
+import {User} from "@nextui-org/user";
+
+import {
+	Dropdown,
+	DropdownTrigger,
+	DropdownMenu,
+	DropdownSection,
+	DropdownItem
+  } from "@nextui-org/dropdown";
+
+  import { useRouter } from 'next/navigation'
 
 export const Navbar = () => {
+
+
+	const router = useRouter()
+
+
+
+	const [userData, setUserData] = useState({}); // Puedes proporcionar un objeto vacío como valor inicial
+	 // Función para obtener y analizar los datos del usuario de la cookie
+	 const getUserDataFromCookie = () => {
+		const cookieValue = document.cookie
+		  .split('; ')
+		  .find(row => row.startsWith('userData='))
+		  ?.split('=')[1];
+	
+		if (cookieValue) {
+		  const userDataObj = JSON.parse(cookieValue);
+		  setUserData(userDataObj);
+		}
+	  };
+
+	  console.log(userData)
+
+	  // Efecto para cargar los datos del usuario cuando se monta el componente
+	  useEffect(() => {
+		console.log('Efecto de carga de usuario');
+		getUserDataFromCookie();
+	  }, []);
+	  
+
+	
+
+	
+	function cerrarSesion() {
+		// Establecer la fecha de expiración en el pasado para eliminar las cookies
+		document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+		document.cookie = 'userData=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+		
+		console.log('Cookies eliminadas');
+		
+		// Redireccionar al usuario después de cerrar sesión
+		window.location.href = '/';
+	  }
+	  
+
+
 	const searchInput = (
 		<Input
 			aria-label="Search"
@@ -49,32 +109,67 @@ export const Navbar = () => {
 			}
 			type="search"
 		/>
+
+		
 	);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
 
 	return (
 		<NextUINavbar maxWidth="xl" position="sticky">
 			<NavbarContent className="basis-1/5 sm:basis-full" justify="start">
 				<NavbarBrand as="li" className="gap-3 max-w-fit">
 					<NextLink className="flex justify-start items-center gap-1" href="/">
-						<Logo />
-						<p className="font-bold text-inherit">ACME</p>
+						
+
+					<img
+						src="./logo.png"
+						alt=""
+						width={150}
+						className="logo-image"
+					/>
+
+
 					</NextLink>
 				</NavbarBrand>
 				<ul className="hidden lg:flex gap-4 justify-start ml-2">
-					{siteConfig.navItems.map((item) => (
-						<NavbarItem key={item.href}>
+					
+						<NavbarItem>
 							<NextLink
 								className={clsx(
 									linkStyles({ color: "foreground" }),
 									"data-[active=true]:text-primary data-[active=true]:font-medium"
 								)}
 								color="foreground"
-								href={item.href}
+								href='/'
 							>
-								{item.label}
+							
 							</NextLink>
 						</NavbarItem>
-					))}
+					
 				</ul>
 			</NavbarContent>
 
@@ -83,29 +178,78 @@ export const Navbar = () => {
 				justify="end"
 			>
 				<NavbarItem className="hidden sm:flex gap-2">
-					<Link isExternal href={siteConfig.links.twitter} aria-label="Twitter">
-						<TwitterIcon className="text-default-500" />
-					</Link>
-					<Link isExternal href={siteConfig.links.discord} aria-label="Discord">
-						<DiscordIcon className="text-default-500" />
-					</Link>
-					<Link isExternal href={siteConfig.links.github} aria-label="Github">
-						<GithubIcon className="text-default-500" />
-					</Link>
 					<ThemeSwitch />
 				</NavbarItem>
 				<NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
 				<NavbarItem className="hidden md:flex">
-					<Button
-            isExternal
-						as={Link}
-						className="text-sm font-normal text-default-600 bg-default-100"
-						href={siteConfig.links.sponsor}
-						startContent={<HeartFilledIcon className="text-danger" />}
-						variant="flat"
-					>
-						Sponsor
+
+			
+				{ userData.rol === "admin" && (<>
+
+
+			<Dropdown>
+				<DropdownTrigger>
+					<Button variant="bordered"> Hola {userData.nombre} </Button>
+				</DropdownTrigger>
+
+				<DropdownMenu aria-label="Static Actions">
+					
+					<DropdownItem className=".dark-text-white" key="new" onClick={() => router.push('/administracion')}><p>Administración</p></DropdownItem>
+					<DropdownItem className=".dark-text-white" key="new" onClick={() => router.push('/favoritos')}><p>Favoritos</p></DropdownItem>
+
+					<DropdownItem key="delete" className="text-danger" color="danger" onClick={cerrarSesion}>
+					Cerrar Sesión
+					</DropdownItem>
+				</DropdownMenu>
+			</Dropdown>
+				
+				</>) }
+
+				{ userData.rol === "user" && (<>
+
+				<Link href="/login">
+					<Button className="mr-4" onClick={cerrarSesion}>
+						Cerrar Sesión
 					</Button>
+				</Link>
+
+				</>) }
+
+				{ userData.rol === null || userData.rol === undefined && (<>
+
+				
+					<Button className="mr-4" onClick={() => router.push('/register')}>
+						Crear Cuenta
+					</Button>
+				
+
+
+				
+					<Button className="mr-4" onClick={() => router.push('/login')}>
+						Iniciar Sesión
+					</Button>
+				
+
+				</>) }
+
+
+						
+					
+				
+				
+				
+			
+
+
+
+
+					
+				
+
+					
+
+	
+
 				</NavbarItem>
 			</NavbarContent>
 

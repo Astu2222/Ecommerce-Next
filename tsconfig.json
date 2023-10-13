@@ -23,6 +23,14 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "components/navbar.jsx",
+    "app/administracion/page.jsx",
+    "app/api/favoritos/route.ts"
+  ],
   "exclude": ["node_modules"]
 }

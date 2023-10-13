@@ -1,3 +1,71 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+p {
+    color: black;
+}
+
+.dark p {
+    color: white;
+}
+
+h1 {
+    color: black;
+}
+
+.dark h1 {
+    color: white;
+}
+
+h2 {
+    color: black;
+}
+
+.dark h2 {
+    color: white;
+}
+
+h3 {
+    color: black;
+}
+
+.dark h3 {
+    color: white;
+}
+
+h4 {
+    color: black;
+}
+
+.dark h4 {
+    color: white;
+}
+
+h5 {
+    color: black;
+}
+
+.dark h5 {
+    color: white;
+}
+
+h6 {
+    color: black;
+}
+
+.dark h6 {
+    color: white;
+}
+
+span{
+    color: black;
+}
+
+.dark span {
+    color: white;
+}
+
+.dark .favoritos-card{
+    filter: invert(100);
+}
