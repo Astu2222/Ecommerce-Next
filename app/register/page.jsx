@@ -7,7 +7,7 @@ import { Button } from '@nextui-org/button';
 
 
 
-const page = () => {
+const Register = () => {
     const router = useRouter()
 
 
@@ -131,4 +131,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Register

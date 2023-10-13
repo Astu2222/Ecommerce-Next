@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import {Input} from "@nextui-org/input";
 import { Button } from '@nextui-org/button';
 
-const page = () => {
+const AgregarProducto  = () => {
 
 
   const [formData, setFormData] = useState({
@@ -90,4 +90,4 @@ const page = () => {
   )
 }
 
-export default page
+export default AgregarProducto

@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import {Input} from "@nextui-org/input";
 import { Button } from '@nextui-org/button';
 
-const page = () => {
+const Login = () => {
 
   const router = useRouter();
 
@@ -117,4 +117,4 @@ const page = () => {
 
 }
 
-export default page
+export default Login
