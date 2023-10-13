@@ -53,17 +53,19 @@ export const Navbar = () => {
 
 	const [userData, setUserData] = useState({}); // Puedes proporcionar un objeto vacío como valor inicial
 	 // Función para obtener y analizar los datos del usuario de la cookie
+	 
 	 const getUserDataFromCookie = () => {
 		const cookieValue = document.cookie
 		  .split('; ')
 		  .find(row => row.startsWith('userData='))
 		  ?.split('=')[1];
-	
+	  
 		if (cookieValue) {
 		  const userDataObj = JSON.parse(cookieValue);
 		  setUserData(userDataObj);
 		}
 	  };
+	  
 
 	  console.log(userData)
 
