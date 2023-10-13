@@ -27,7 +27,7 @@ const AgregarProducto  = () => {
     };
 
     // Realizar la solicitud POST a la API utilizando fetch
-    fetch('http://localhost:3000/api/productos', {
+    fetch('https://ecommerce-next-delta.vercel.app/api/productos', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
