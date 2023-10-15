@@ -55,9 +55,9 @@ export default function Page({ params }: { params: { id: string } }) {
         
         
         <Card className="m-9">
-        <div className="w-full flex flex-row items-center justify-center  ">
+        <div className="w-full flex flex-col items-center justify-center  ">
 
-          <div className="w-1/2">
+          <div className="w-full flex items-center justify-center">
           <Image className="m-4" src={productosXID.url_imagen} alt="" />
           </div>
 
@@ -68,7 +68,6 @@ export default function Page({ params }: { params: { id: string } }) {
             <h1 className='text-bold text-5xl m-4' >{productosXID.nombre}</h1>
             <Chip className="text-4xl p-6" color="warning" variant="bordered">Precio: ${productosXID.precio} Ars</Chip>
             <h2 className="m-5" >{productosXID.descripcion}</h2>
-            <h1 className='text-bold text-3xl'>Color: <Button>{productosXID.colorPublicacion}</Button> </h1>
 
 
           </div>

@@ -14,8 +14,9 @@ const Carrusel = () => {
   return (
     <>
     <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
-      <SwiperSlide><Image src="https://images4.alphacoders.com/114/1145851.jpg" alt="" style={{objectFit:"cover" , height:"900px", borderRadius:"0",width:"100vw"}} /></SwiperSlide>
+      <SwiperSlide><Image  src="https://images4.alphacoders.com/114/1145851.jpg" alt="" style={{objectFit:"cover" , height:"900px", borderRadius:"0",width:"100vw"}} /></SwiperSlide>
       <SwiperSlide><Image src="https://images5.alphacoders.com/901/901156.jpg" alt="" style={{objectFit:"cover" , height:"900px", borderRadius:"0",width:"100vw"}}  /></SwiperSlide>
+    <SwiperSlide><Image className='imagenGIF' src="/tiger.gif" alt="" style={{objectFit:"cover" , height:"100%", borderRadius:"0",width:"100vw"}}  /></SwiperSlide>
 
 
     </Swiper>

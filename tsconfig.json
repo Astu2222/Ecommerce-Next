@@ -31,6 +31,6 @@
     "components/navbar.jsx",
     "app/administracion/page.jsx",
     "app/api/favoritos/route.ts"
-  ],
+, "app/favoritos/page.jsx"  ],
   "exclude": ["node_modules"]
 }

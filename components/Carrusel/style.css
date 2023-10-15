@@ -39,3 +39,10 @@
     object-fit: cover;
   }
   
+  .imagenGIF{
+    filter: invert(100);
+  }
+
+  .dark .imagenGIF{
+    filter: invert(0);
+  }

@@ -13,8 +13,12 @@ export async function POST(request: Request) {
   try {
     // Realiza una consulta a la base de datos para obtener el usuario
     const result = await sql`
-      SELECT * FROM usuarios
-      WHERE email = ${email} AND contraseña = ${password}
+    SELECT u.id, u.nombre, u.apellido, u.email, u.url_imagen, u.rol, array_agg(uf.producto_id) AS productos_favoritos
+    FROM usuarios AS u
+    LEFT JOIN usuarios_favoritos AS uf ON u.id = uf.usuario_id
+    WHERE u.email = ${email} AND u.contraseña = ${password}
+    GROUP BY u.id;
+      
     `;
     
 

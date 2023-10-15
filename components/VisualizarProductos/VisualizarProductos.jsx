@@ -15,9 +15,9 @@ const VisualizarProductos = () => {
         <div className='visualizarProductos'>
             {productos.map((producto) => (
 
-                <Link href={`/detalle/${producto.id}`} key={producto.id}>    
+                 
                     <Card key={producto.id} producto={producto} />
-                </Link>
+                
                 
             ))}
         </div>
